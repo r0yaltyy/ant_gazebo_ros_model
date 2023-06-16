@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="crazy_stool">
+    
+    <xacro:property name="body_mass"  value="5" />
+    <xacro:property name="leg_mass"  value="0.1" />
+    <xacro:property name="body_inertia" value="1e-4"  />
+    <xacro:property name="damping" value="0.01"  />
+    
+    <link name="base_link" />
+    
+    <joint name="fix_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="body_link" />
+    </joint>
+    
+    <link name="body_link">
+        <inertial>
+            <mass value="${body_mass}" />
+            <inertia ixx="${body_inertia}" ixy="0" ixz="0" iyy="${body_inertia}" iyz="0" izz="${body_inertia}" />
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.2 0.2 0.01"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.2 0.2 0.01"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="body_link">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <material>Gazebo/Black</material>
+        <dampingFactor>${damping}</dampingFactor>
+    </gazebo>
+    
+    
+    
+    
+    <xacro:macro name="leg" params="name dx dy rotation">
+        <link name="${name}_link">
+            <inertial>
+                <mass value="${leg_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="0.1 0.01 0.01"/>
+                </geometry>
+                <origin xyz="0.06 0 0" rpy="0 0 0" />
+                <material
+                    name="black">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="0.1 0.01 0.01"/>
+                </geometry>
+                <origin xyz="0.06 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}_joint" type="revolute">
+            <origin xyz="${dx} ${dy} 0" rpy="0 ${pi*0.25} ${rotation}" />
+            <parent link="body_link" />
+            <child link="${name}_link" />
+            <axis xyz="0 1 0" />
+            <limit lower="-0.01" upper="0.01" effort="1000" velocity="1000" />
+            <dynamics damping="0.5" friction="0.5" />
+        </joint>
+        <gazebo reference="${name}_link">
+            <mu1>100</mu1>
+            <mu2>100</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+            <kp>1000000</kp>
+            <!--kd>100000000000</kd-->
+        </gazebo>
+        <gazebo reference="${name}_joint">
+            <implicitSpringDamper>True</implicitSpringDamper>
+            <stopCfm>0.5</stopCfm>
+            <stopErp>0.2</stopErp>
+            <!--springStiffness>0.001</springStiffness-->
+        </gazebo>
+        
+    </xacro:macro>
+    
+    <xacro:leg name="left_forward" dx="0.1" dy="0.1" rotation="${pi/2}" />
+    <xacro:leg name="right_forward" dx="0.1" dy="-0.1" rotation="${-pi/2}" />
+    <xacro:leg name="left_backward" dx="-0.1" dy="0.1" rotation="${pi/2}" />
+    <xacro:leg name="right_backward" dx="-0.1" dy="-0.1" rotation="${-pi/2}" />
+    
+    
+    
+    
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+    
+</robot>

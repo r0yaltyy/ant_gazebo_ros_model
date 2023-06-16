@@ -1,0 +1,104 @@
+<launch>
+
+  <arg name="pid_p" default="0.001" />
+  <arg name="pid_i" default="0.0001" />
+  <arg name="pid_d" default="0.0" />
+  
+  <arg name="step_dist" default="0.002" />
+  <arg name="cycle_time" default="4" />
+  
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="true"/>
+  </include>
+  
+   <param name="robot_description" command="xacro --inorder '$(find ant_model_description)/urdf/ant_model.urdf'"/>
+   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model ant_model -z 0.001" output="screen" />
+
+    <rosparam command="load" file="$(find ant_model_control)/config/control.yaml" subst_value="true" />
+    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+              respawn="false" output="screen"
+              args="joint_state_controller
+              left_forward1_position_controller
+              left_forward2_position_controller
+              left_forward3_position_controller
+              left_forward4_position_controller
+              left_middle1_position_controller
+              left_middle2_position_controller
+              left_middle3_position_controller
+              left_middle4_position_controller
+              left_backward1_position_controller
+              left_backward2_position_controller
+              left_backward3_position_controller
+              left_backward4_position_controller
+              right_forward1_position_controller
+              right_forward2_position_controller
+              right_forward3_position_controller
+              right_forward4_position_controller
+              right_middle1_position_controller
+              right_middle2_position_controller
+              right_middle3_position_controller
+              right_middle4_position_controller
+              right_backward1_position_controller
+              right_backward2_position_controller
+              right_backward3_position_controller
+              right_backward4_position_controller">
+        </node>
+    
+    <node name="ant_motion_controller" pkg="ant_model_control" type="ant_motion_control_node.py" output="screen" required="true" >
+        <param name="step_dist" value="$(arg step_dist)"/>
+        <param name="cycle_time" value="$(arg cycle_time)"/>
+    </node>
+    
+    <!--node name="data_gatherer" pkg="ant_model_control" type="data_gatherer.py" required="True">
+        <param name="out_file" value="$(find ant_model_control)/output/res.csv"/>
+        <param name="step_dist" value="$(arg step_dist)"/>
+        <param name="cycle_time" value="$(arg cycle_time)"/>
+    </node-->
+    
+    <!--node name="teacher" pkg="ant_model_control" type="teacher.py" required="True" output="screen">
+    </node-->
+
+    <node name="joy" pkg="joy" type="joy_node" />
+    
+    <!--node name="teleop" pkg="teleop_twist_joy" type="teleop_node" /-->
+    <node name="teleop" pkg="ant_model_control" type="ant_joy_teleop_node.py" />
+    
+    <!--node pkg="rviz" type="rviz" name="rviz" args="-d $(find ant_model_config)/rviz/ant_model.rviz"/-->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+
+    <group ns="camera">
+       <param name="robot_description" command="xacro --inorder '$(find ant_model_description)/urdf/camera.urdf'"/>
+   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model camera -z 0.1" output="screen" />
+   </group>
+   
+    <arg name="x" default="-0.005"/>
+    <arg name="y" default="0.035"/>
+    <arg name="z" default="0.0"/>   
+    <group ns="box">
+       <param name="robot_description" command="xacro --inorder '$(find ant_model_description)/urdf/box.urdf'"/>
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model box -x $(arg x) -y $(arg y) -z $(arg z) -param robot_description"/>
+   </group>
+   
+    <arg name="xt" default="0.035"/>
+    <arg name="yt" default="-0.005"/>
+    <arg name="zt" default="0.0"/>   
+    <group ns="box2">
+       <param name="robot_description" command="xacro --inorder '$(find ant_model_description)/urdf/box2.urdf'"/>
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model box2 -x $(arg xt) -y $(arg yt) -z $(arg zt) -param robot_description"/>
+   </group>
+   
+    <arg name="xd" default="0.035"/>
+    <arg name="yd" default="0.035"/>
+    <arg name="zd" default="0.0"/>   
+    <group ns="box3">
+       <param name="robot_description" command="xacro --inorder '$(find ant_model_description)/urdf/box3.urdf'"/>
+   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model box3 -x $(arg xd) -y $(arg yd) -z $(arg zd) -param robot_description"/>
+   </group>  
+   
+    
+    <node name="csv_creator" pkg="ant_model_control" type="csv_create.py" />
+    
+</launch>

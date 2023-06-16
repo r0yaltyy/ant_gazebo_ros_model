@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="ant_model">
+    
+    <xacro:property name="body_width"  value="0.097" />
+    <xacro:property name="body_length" value="0.188" />
+    <xacro:property name="body_height" value="0.1" />
+    
+    <xacro:property name="body_mass" value="0.1" />
+    <xacro:property name="segment_mass" value="0.01" />
+    
+    <xacro:property name="l1_f" value="0.066" />
+    <xacro:property name="l2_f" value="0.130" />
+    <xacro:property name="l3_f" value="0.103" />
+    <xacro:property name="l4_f" value="0.070" />
+    <xacro:property name="l1_m" value="0.038" />
+    <xacro:property name="l2_m" value="0.138" />
+    <xacro:property name="l3_m" value="0.121" />
+    <xacro:property name="l4_m" value="0.100" />
+    <xacro:property name="l1_b" value="0.044" />
+    <xacro:property name="l2_b" value="0.161" />
+    <xacro:property name="l3_b" value="0.146" />
+    <xacro:property name="l4_b" value="0.115" />
+    <xacro:property name="l_width" value="0.01" />
+    <xacro:property name="f_width" value="0.01" />
+    
+    
+    <xacro:property name="l1_pos_x" value="0.05"  />
+    <xacro:property name="l1_pos_y" value="0.05"  />
+    <xacro:property name="l2_pos_x" value="0"  />
+    <xacro:property name="l2_pos_y" value="0.05"  />
+    <xacro:property name="l3_pos_x" value="-0.05"  />
+    <xacro:property name="l3_pos_y" value="0.05"  />
+    <xacro:property name="damping" value="0.01"  />
+    <xacro:property name="body_inertia" value="1e-4"  />
+    <xacro:property name="stopCfm" value="10000"  />
+    <xacro:property name="stopErp" value="0.1"  />
+    <xacro:property name="d_damping" value="0.5"  />
+    <xacro:property name="d_friction" value="0.0"  />
+    <xacro:property name="flex_limit" value="0.01"  />
+    <xacro:property name="kp" value="100000"  />
+    
+    <link name="base_link" />
+    
+    <joint name="fix_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="body_link" />
+    </joint>
+    
+    <link name="body_link">
+        <inertial>
+            <mass value="${body_mass}" />
+            <inertia ixx="${body_inertia}" ixy="0" ixz="0" iyy="${body_inertia}" iyz="0" izz="${body_inertia}" />
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="${body_length} ${body_width} ${body_height}"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${body_length} ${body_width} ${body_height}"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="body_link">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    
+    <link name="head_link">
+        <inertial>
+            <mass value="${body_mass*0.2}" />
+            <inertia ixx="${body_inertia*0.1}" ixy="0" ixz="0" iyy="${body_inertia*0.1}" iyz="0" izz="${body_inertia*0.1}" />
+        </inertial>
+        <visual>
+            <geometry>
+                <sphere radius="${body_length/4}"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${body_length/4}"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="head_link">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <joint name="head_joint" type="fixed">
+        <origin xyz="${4*body_length/8+0.1} 0 0" rpy="0 0 0" />
+        <parent link="body_link" />
+        <child link="head_link" />
+    </joint>
+    
+    
+    <link name="abdomen_link">
+        <inertial>
+            <mass value="${body_mass*0.3}" />
+            <inertia ixx="${body_inertia*0.1}" ixy="0" ixz="0" iyy="${body_inertia*0.1}" iyz="0" izz="${body_inertia*0.1}" />
+        </inertial>
+        <visual>
+            <geometry>
+                <sphere radius="${body_length/3}"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="${body_length/3}"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="abdomen_link">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <joint name="abdomen_joint" type="fixed">
+        <origin xyz="${-4*body_length/8-0.1} 0 0" rpy="0 0 0" />
+        <parent link="body_link" />
+        <child link="abdomen_link" />
+    </joint>
+    
+    
+    
+    <xacro:macro name="leg" params="name dx dy l1 l2 l3 l4 direction">
+        <link name="${name}1_link">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l1} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l1*0.5} 0 0" rpy="0 0 0" />
+                <material name="black">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l1} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l1*0.5} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}1_joint" type="continuous">
+            <origin xyz="${dx} ${dy} ${body_height*0.5 + l_width*0.5+0.01}" rpy="0 0 ${direction}" />
+            <parent link="body_link" />
+            <child link="${name}1_link" />
+            <axis xyz="0 0 1" />
+        </joint>
+        <transmission name="${name}1_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}1_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}1_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+        <gazebo reference="${name}1_link">
+            <mu1>3</mu1>
+            <mu2>3</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+        </gazebo>
+        <link name="${name}2_link">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l2} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l2*0.5} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l2} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l2*0.5} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}2_joint" type="continuous">
+            <origin xyz="${l1+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}1_link" />
+            <child link="${name}2_link" />
+            <axis xyz="0 1 0" />
+        </joint>
+        <transmission name="${name}2_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}2_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}2_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+        <gazebo reference="${name}2_link">
+            <mu1>3</mu1>
+            <mu2>3</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+        </gazebo>
+        
+        <link name="${name}3_link">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l3} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l3*0.5} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l3} ${l_width} ${l_width}"/>
+                </geometry>
+                <origin xyz="${l3*0.5} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}3_joint" type="continuous">
+            <origin xyz="${l2+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}2_link" />
+            <child link="${name}3_link" />
+            <axis xyz="0 1 0" />
+        </joint>
+        <transmission name="${name}3_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}3_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}3_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+        <gazebo reference="${name}3_link">
+            <mu1>3</mu1>
+            <mu2>3</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+        </gazebo>
+        
+        <link name="${name}4_link">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}4_joint" type="revolute">
+            <origin xyz="${l3+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}3_link" />
+            <child link="${name}4_link" />
+            <axis xyz="0 1 0" />
+            <!--dynamics damping="0.000007"/-->
+            <limit lower="${-flex_limit}" upper="${flex_limit}" effort="1000" velocity="1000" />
+            <dynamics damping="${d_damping}" friction="${d_friction}" />
+        </joint>
+        <gazebo reference="${name}4_link">
+            <mu1>5</mu1>
+            <mu2>5</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+            <kp>${kp}</kp>
+        </gazebo>
+        <gazebo reference="${name}4_joint">
+            <implicitSpringDamper>True</implicitSpringDamper>
+            <stopCfm>${stopCfm}</stopCfm>
+            <stopErp>${stopErp}</stopErp>
+            <!--springStiffness>0.001</springStiffness-->
+        </gazebo>
+        <transmission name="${name}4_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}4_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}4_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+        
+        <link name="${name}4_link_e1">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}4_joint_e1" type="revolute">
+            <origin xyz="${l4*0.25+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}4_link" />
+            <child link="${name}4_link_e1" />
+            <axis xyz="0 0 1" />
+            <!--dynamics damping="0.000007"/-->
+            <limit lower="${-flex_limit}" upper="${flex_limit}" effort="1000" velocity="1000" />
+            <dynamics damping="${d_damping}" friction="${d_friction}" />
+        </joint>
+        <gazebo reference="${name}4_link_e1">
+            <mu1>5</mu1>
+            <mu2>5</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+            <kp>${kp}</kp>
+        </gazebo>
+        <gazebo reference="${name}4_joint_e1">
+            <implicitSpringDamper>True</implicitSpringDamper>
+            <stopCfm>${stopCfm}</stopCfm>
+            <stopErp>${stopErp}</stopErp>
+            <!--springStiffness>0.001</springStiffness-->
+        </gazebo>
+        <transmission name="${name}4_e1_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}4_e1_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}4_joint_e1">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+
+        <link name="${name}4_link_e2">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}4_joint_e2" type="revolute">
+            <origin xyz="${l4*0.25+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}4_link_e1" />
+            <child link="${name}4_link_e2" />
+            <axis xyz="0 1 0" />
+            <!--dynamics damping="0.000007"/-->
+            <limit lower="${-flex_limit}" upper="${flex_limit}" effort="1000" velocity="1000" />
+            <dynamics damping="${d_damping}" friction="${d_friction}" />
+        </joint>
+        <gazebo reference="${name}4_link_e2">
+            <mu1>5</mu1>
+            <mu2>5</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+            <kp>${kp}</kp>
+        </gazebo>
+        <gazebo reference="${name}4_joint_e2">
+            <implicitSpringDamper>True</implicitSpringDamper>
+            <stopCfm>${stopCfm}</stopCfm>
+            <stopErp>${stopErp}</stopErp>
+            <!--springStiffness>0.001</springStiffness-->
+        </gazebo>
+        <transmission name="${name}4_e2_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}4_e2_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}4_joint_e2">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+        <link name="${name}4_link_e3">
+            <inertial>
+                <mass value="${segment_mass}" />
+                <inertia ixx="${body_inertia*0.01}" ixy="0" ixz="0" iyy="${body_inertia*0.01}" iyz="0" izz="${body_inertia*0.01}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+                <material name="">
+                    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${l4*0.25} ${l_width} ${f_width}"/>
+                </geometry>
+                <origin xyz="${l4*0.125} 0 0" rpy="0 0 0" />
+            </collision>
+        </link>
+        <joint name="${name}4_joint_e3" type="revolute">
+            <origin xyz="${l4*0.25+l_width*0.5} 0 0" rpy="0 0 0" />
+            <parent link="${name}4_link_e2" />
+            <child link="${name}4_link_e3" />
+            <axis xyz="0 0 1" />
+            <!--dynamics damping="0.000007"/-->
+            <limit lower="${-flex_limit}" upper="${flex_limit}" effort="1000" velocity="1000" />
+            <dynamics damping="${d_damping}" friction="${d_friction}" />
+        </joint>
+        <gazebo reference="${name}4_link_e3">
+            <mu1>5</mu1>
+            <mu2>5</mu2>
+            <material>Gazebo/Black</material>
+            <dampingFactor>${damping}</dampingFactor>
+            <kp>${kp}</kp>
+        </gazebo>
+        <gazebo reference="${name}4_joint_e3">
+            <implicitSpringDamper>True</implicitSpringDamper>
+            <stopCfm>${stopCfm}</stopCfm>
+            <stopErp>${stopErp}</stopErp>
+            <!--springStiffness>0.001</springStiffness-->
+        </gazebo>
+        <transmission name="${name}4_e3_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <actuator name="${name}4_e3_motor">
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+            <joint name="${name}4_joint_e3">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+        </transmission>
+    </xacro:macro>
+    
+    <xacro:leg name="left_forward" dx="${l1_pos_x}" dy="${l1_pos_y}" l1="${l1_f}" l2="${l2_f}" l3="${l3_f}" l4="${l4_f}"  direction="${pi/2}" />
+    <xacro:leg name="right_forward" dx="${l1_pos_x}" dy="${-l1_pos_y}" l1="${l1_f}" l2="${l2_f}" l3="${l3_f}" l4="${l4_f}" direction="${-pi/2}"/>
+    <xacro:leg name="left_middle" dx="${l2_pos_x}" dy="${l2_pos_y}" l1="${l1_m}" l2="${l2_m}" l3="${l3_m}" l4="${l4_m}" direction="${pi/2}"/>
+    <xacro:leg name="right_middle" dx="${l2_pos_x}" dy="${-l2_pos_y}" l1="${l1_m}" l2="${l2_m}" l3="${l3_m}" l4="${l4_m}"  direction="${-pi/2}" />
+    <xacro:leg name="left_backward" dx="${l3_pos_x}" dy="${l3_pos_y}" l1="${l1_b}" l2="${l2_b}" l3="${l3_b}" l4="${l4_b}" direction="${pi/2}" />
+    <xacro:leg name="right_backward" dx="${l3_pos_x}" dy="${-l3_pos_y}" l1="${l1_b}" l2="${l2_b}" l3="${l3_b}" l4="${l4_b}" direction="${-pi/2}" />
+    
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+    
+</robot>

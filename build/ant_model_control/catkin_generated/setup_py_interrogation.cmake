@@ -1,0 +1,7 @@
+set(ant_model_control_SETUP_PY_SETUP_MODULE "setuptools")
+set(ant_model_control_SETUP_PY_VERSION "1.0.0")
+set(ant_model_control_SETUP_PY_SCRIPTS "")
+set(ant_model_control_SETUP_PY_PACKAGES "ant_model_control")
+set(ant_model_control_SETUP_PY_PACKAGE_DIRS "src/ant_model_control")
+set(ant_model_control_SETUP_PY_MODULES "")
+set(ant_model_control_SETUP_PY_MODULE_DIRS "")

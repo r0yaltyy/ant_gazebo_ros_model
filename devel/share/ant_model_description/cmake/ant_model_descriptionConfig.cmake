@@ -1,0 +1,1 @@
+/home/alex/ant_ws/devel/.private/ant_model_description/share/ant_model_description/cmake/ant_model_descriptionConfig.cmake

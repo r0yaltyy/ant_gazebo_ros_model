@@ -1,0 +1,89 @@
+<launch>
+
+  <arg name="pid_p" default="1." />
+  <arg name="pid_i" default="0.1" />
+  <arg name="pid_d" default="0.0" />
+  
+  <arg name="step_dist" default="0.2" />
+  <arg name="cycle_time" default="0.4" />
+  
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="false"/>
+  </include>  
+   
+   <param name="robot_description" command="xacro --inorder '$(find flexible_test_descr)/urdf/ant_model_big.urdf'"/>
+   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model ant_model -z 0.1" output="screen" />
+
+    <rosparam command="load" file="$(find flexible_test_descr)/config/control.yaml" subst_value="true" />
+    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+              respawn="false" output="screen"
+              args="joint_state_controller
+              left_forward1_position_controller
+              left_forward2_position_controller
+              left_forward3_position_controller
+              left_forward4_position_controller
+              left_forward41_position_controller
+              left_forward42_position_controller
+              left_forward43_position_controller
+              left_middle1_position_controller
+              left_middle2_position_controller
+              left_middle3_position_controller
+              left_middle4_position_controller
+              left_middle41_position_controller
+              left_middle42_position_controller
+              left_middle43_position_controller
+              left_backward1_position_controller
+              left_backward2_position_controller
+              left_backward3_position_controller
+              left_backward4_position_controller
+              left_backward41_position_controller
+              left_backward42_position_controller
+              left_backward43_position_controller
+              right_forward1_position_controller
+              right_forward2_position_controller
+              right_forward3_position_controller
+              right_forward4_position_controller
+              right_forward41_position_controller
+              right_forward42_position_controller
+              right_forward43_position_controller
+              right_middle1_position_controller
+              right_middle2_position_controller
+              right_middle3_position_controller
+              right_middle4_position_controller
+              right_middle41_position_controller
+              right_middle42_position_controller
+              right_middle43_position_controller
+              right_backward1_position_controller
+              right_backward2_position_controller
+              right_backward3_position_controller
+              right_backward4_position_controller
+              right_backward41_position_controller
+              right_backward42_position_controller
+              right_backward43_position_controller">
+        </node>
+    
+    <node name="ant_motion_controller" pkg="ant_model_control" type="ant_motion_control_node.py" output="screen" required="true" >
+        <param name="step_dist" value="$(arg step_dist)"/>
+        <param name="cycle_time" value="$(arg cycle_time)"/>
+    </node>
+    
+    <!--node name="data_gatherer" pkg="ant_model_control" type="data_gatherer.py" required="True">
+        <param name="out_file" value="$(find ant_model_control)/output/res.csv"/>
+        <param name="step_dist" value="$(arg step_dist)"/>
+        <param name="cycle_time" value="$(arg cycle_time)"/>
+    </node-->
+    
+    <!--node name="teacher" pkg="ant_model_control" type="teacher.py" required="True" output="screen">
+    </node>
+
+    <node name="joy" pkg="joy" type="joy_node" /-->
+    
+    <!--node name="teleop" pkg="teleop_twist_joy" type="teleop_node" /-->
+    <node name="teleop" pkg="ant_model_control" type="ant_joy_teleop_node.py" />
+    
+    <!--node pkg="rviz" type="rviz" name="rviz" args="-d $(find ant_model_config)/rviz/ant_model.rviz"/-->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    
+</launch>

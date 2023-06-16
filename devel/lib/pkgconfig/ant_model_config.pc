@@ -1,0 +1,1 @@
+/home/alex/ant_ws/devel/.private/ant_model_config/lib/pkgconfig/ant_model_config.pc

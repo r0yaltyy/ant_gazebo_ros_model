@@ -1,0 +1,6 @@
+Symlinking /home/alex/ant_ws/devel/share/ant_model_control/cmake/ant_model_controlConfig-version.cmake
+Symlinking /home/alex/ant_ws/devel/share/ant_model_control/cmake/ant_model_controlConfig.cmake
+Symlinking /home/alex/ant_ws/devel/lib/python3/dist-packages/ant_model_control/__init__.py
+Symlinking /home/alex/ant_ws/devel/lib/ant_model_control/cmake.lock
+Symlinking /home/alex/ant_ws/devel/lib/ant_model_control/ant_motion_control_node.py
+Symlinking /home/alex/ant_ws/devel/lib/pkgconfig/ant_model_control.pc

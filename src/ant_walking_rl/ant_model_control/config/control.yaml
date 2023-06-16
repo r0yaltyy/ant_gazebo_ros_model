@@ -1,0 +1,322 @@
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+# Position Controllers ---------------------------------------
+left_forward1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_forward2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_forward3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward3_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_forward4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward4_joint
+left_forward41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward4_joint_e1
+left_forward42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward4_joint_e2
+left_forward43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_forward4_joint_e3
+right_forward1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_forward2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_forward3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward3_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_forward4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward4_joint
+right_forward41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward4_joint_e1
+right_forward42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward4_joint_e2
+right_forward43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_forward4_joint_e3
+left_middle1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_middle2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_middle3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle3_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_middle4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle4_joint
+left_middle41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle4_joint_e1
+left_middle42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle4_joint_e2
+left_middle43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_middle4_joint_e3
+right_middle1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_middle2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_middle3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle3_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_middle4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle4_joint
+right_middle41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle4_joint_e1
+right_middle42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle4_joint_e2
+right_middle43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_middle4_joint_e3
+right_backward1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_backward2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_backward3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward3_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+right_backward4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward4_joint
+right_backward41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward4_joint_e1
+right_backward42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward4_joint_e2
+right_backward43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: right_backward4_joint_e3
+left_backward1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward1_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_backward2_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward2_joint
+  #pid: {p: 1.0, i: 0, d: 0.0}
+left_backward3_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward3_joint
+ # pid: {p: 1.0, i: 0, d: 0.0}
+left_backward4_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward4_joint
+left_backward41_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward4_joint_e1
+left_backward42_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward4_joint_e2
+left_backward43_position_controller:
+  type: position_controllers/JointPositionController
+  joint: left_backward4_joint_e3
+
+  
+gazebo_ros_control:
+  pid_gains:
+    left_forward1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_forward4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_middle4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    left_backward4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_forward4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_middle4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward1_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward2_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward3_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward4_joint:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward4_joint_e1:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward4_joint_e2:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)
+    right_backward4_joint_e3:
+      p: $(arg pid_p)
+      i: $(arg pid_i)
+      d: $(arg pid_d)

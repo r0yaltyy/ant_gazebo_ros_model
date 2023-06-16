@@ -1,0 +1,19 @@
+<launch>
+
+  <arg name="pid_p" default="0.001" />
+  <arg name="pid_i" default="0.0001" />
+  <arg name="pid_d" default="0.0" />
+  
+  <arg name="step_dist" default="0.002" />
+  <arg name="cycle_time" default="0.4" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name="paused" value="false"/>
+  </include>  
+   
+   <param name="robot_description" command="xacro --inorder '$(find flexible_test_descr)/urdf/flexible.urdf'"/>
+   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model crazy_stool -z 0.1" output="screen" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    
+</launch>

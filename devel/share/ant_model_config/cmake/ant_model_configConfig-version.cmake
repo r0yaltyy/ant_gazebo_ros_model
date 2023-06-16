@@ -1,0 +1,1 @@
+/home/alex/ant_ws/devel/.private/ant_model_config/share/ant_model_config/cmake/ant_model_configConfig-version.cmake

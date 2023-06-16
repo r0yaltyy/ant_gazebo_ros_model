@@ -1,0 +1,6 @@
+devel_space: /home/alex/ant_ws/devel
+install: false
+install_space: /home/alex/ant_ws/install
+profile: default
+source_space: /home/alex/ant_ws/src
+workspace: /home/alex/ant_ws

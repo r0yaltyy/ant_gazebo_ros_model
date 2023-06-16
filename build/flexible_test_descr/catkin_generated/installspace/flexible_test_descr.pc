@@ -1,0 +1,8 @@
+prefix=/home/alex/ant_ws/install
+
+Name: flexible_test_descr
+Description: Description of flexible_test_descr
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

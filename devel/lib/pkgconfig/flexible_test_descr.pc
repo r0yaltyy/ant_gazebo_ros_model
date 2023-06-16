@@ -1,0 +1,1 @@
+/home/alex/ant_ws/devel/.private/flexible_test_descr/lib/pkgconfig/flexible_test_descr.pc

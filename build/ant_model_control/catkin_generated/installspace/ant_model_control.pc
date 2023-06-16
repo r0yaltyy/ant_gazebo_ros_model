@@ -1,0 +1,8 @@
+prefix=/home/alex/ant_ws/install
+
+Name: ant_model_control
+Description: Description of ant_model_control
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
